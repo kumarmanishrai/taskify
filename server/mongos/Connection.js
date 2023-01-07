@@ -1,9 +1,11 @@
+
+require('dotenv').config()
 const mongoose = require('mongoose')
 
 mongoose.set('strictQuery', false)
 
 mongoose
-	.connect("mongodb+srv://manishkumarrai:@cluster0.epmvr9l.mongodb.net/?retryWrites=true&w=majority",{
+	.connect(process.env.MONGO_URL.toString(),{
 		useNewUrlParser: true,
 		useUnifiedTopology: true
 	})

@@ -2,10 +2,12 @@ const Todo = require('../model/Schema')
 
 // createing a todo
 exports.create = (req, res) => {
+    console.log(req.body);
     if(!req.body.note){
-        return res.status(400).send({
+        res.status(400).send({
             message: "Todo content can be empty"
         })
+        return 
     }
     const todo = new Todo({
         note: req.body.note
@@ -36,6 +38,7 @@ exports.findAll = (req, res) => {
 
 // delete controller 
 exports.delete = (req, res) => {
+    console.log(req.params);
     Todo.findByIdAndDelete(req.params.todoId)
         .then(todo => {
             if(!todo){

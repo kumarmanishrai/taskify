@@ -1,32 +1,64 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import Item from './components/Item'
+import axios from 'axios'
 
 import './App.css'
 
 
 function App() {
-  const [note, setNote] = useState('')
 
-  const handleChange = (event) => {
-    setNote(event.target.value)
+  const [todo, setTodo] = useState([])
+  const [inpText, setInpText] = useState('')
+
+
+  const reloadData = () => {
+    axios.get("http://localhost:5000/getTodo")
+      .then(res => setTodo(res.data))
+      .catch(err => console.log(err))
   }
+  useEffect(()=> {
+    reloadData()
+  }, [])
+
+
+  
+  const addTodo = () => {
+    axios.post("http://localhost:5000/createTodo", {note: inpText})
+      .then(res => {
+        console.log(res.data);
+        setInpText("")
+        reloadData()
+      })
+      .catch((err) => console.log(err));
+  }
+
+  const deleteTodo = (_id) => {
+    axios.get(`http://localhost:5000/deleteTodo/${_id}`)
+    .then((res) => {
+      reloadData()
+      console.log(res.data)
+    })
+    .catch((err) => console.log(err));
+  }
+ 
 
   return (
     <div className="App">
       <div className="inp-area">
-        <input onChange={handleChange} type="text" id="inp" placeholder='type here..' />
-        <button onClick={''}>Save</button>
+        <input 
+          value= {inpText}
+          onChange={(e)=> setInpText(e.target.value)} type="text" id="inp"  placeholder='type here..' />
+        <button onClick={addTodo}>Save</button>
       </div>
 
       <div className="notes">
-        
-        <div className="note">
-          <div id='text'>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores ea, cumque, a, porro velit tempora molestias optio neque dolorum ut laudantium qui facilis iure dicta illum quia deleniti. Cum, vitae! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt eaque repellendus necessitatibus sit officiis fugiat quia a deserunt soluta mollitia nemo nostrum, commodi delectus nesciunt ullam aut, magnam alias modi.
-          </div>
-          <span id='extra'>
-            buttons
-            </span>
-        </div>
+        {todo.map(item => <Item 
+          key = {item._id}
+          text = {item.note}
+          remove = {() => deleteTodo(item._id)}
+        />
+        )}
+
       </div>
     </div>
 
