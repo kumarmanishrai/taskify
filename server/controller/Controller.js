@@ -22,4 +22,32 @@ exports.create = (req, res) => {
 }
 
 // find all 
+exports.findAll = (req, res) => {
+    Todo.find()
+        .then(todos => {
+            res.send(todos)
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "some error occured while retrieving"
+            })
+        })
+}
 
+// delete controller 
+exports.delete = (req, res) => {
+    Todo.findByIdAndDelete(req.params.todoId)
+        .then(todo => {
+            if(!todo){
+                return res.status(404).send({
+                    message: "Todonot found with id" + req.params.todoId
+                })
+            }
+            res.send({message: "Todo deleted successfully....!"})
+        })
+        .catch(err => {
+            return res.status(404).send({
+                message: "Todo not found with Id" + req.params.todoId 
+            })
+        })
+}
