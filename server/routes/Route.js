@@ -6,4 +6,5 @@ module.exports = (app) => {
     app.get('/getTodo', controller.findAll)
     app.post('/createTodo', controller.create)
     app.get('/deleteTodo/:todoId', controller.delete)
+    app.post('/changeStatus/:todoId', controller.changeStatus)
 }

@@ -1,54 +1,123 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  /* text-align: center; */
+/* styles.css */
+:root {
+  --bg-color-dark: #222;
+  --bg-color-light: #fff;
+  --text-color-dark: #fff;
+  --text-color-light: #333;
+  --border-color-dark: #444;
 }
-.App {
+
+body {
+  background-color: var(--bg-color-dark);
+  color: var(--text-color-dark);
+  font-family: Arial, sans-serif;
+  margin: 40px 10px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  height: auto;
 }
+
 .notes{
-  margin-top: 40px;
   display: flex;
-  flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 40px;
-}
-.note {
-  /* overflow-y: scroll; */
-  height: 240px;
-  display: flex;
-  flex-wrap: wrap;
-  position: relative;
-  min-width:240px;
-  /* max-width: auto; */
-  background-color: #213547;
-  color: white;  
-  border: 4px solid #168d22;
-  border-radius: 6px;
-  position: relative;
-  
-}
-#text {
-  overflow-y: scroll;
-  padding-left: 2px;
-  padding-right: 2px;
-  position: relative;
-  height: 200px;
-  width: 236px;
-  overflow-y: scroll;
-}
-#extra{
-  min-width:240px;
-  display: flex;
-  justify-content: right;
-  color: #fff;
-  align-items: center;
-  position: absolute;
-  text-align: center;
-  height: 12%;
-  bottom: 0;
+  margin-top: 40px;
 
-  background-color: #168d22;
 }
+
+.card {
+  min-width: 20vw;
+  background-color: var(--bg-color-dark);
+  color: var(--text-color-dark);
+  border-radius: 10px;
+  border: 1px solid var(--border-color-dark);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  max-width: 300px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  position: relative; /* Add position: relative to make the .inp-area top: 40px relative to this */
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.card-header h3 {
+  font-size: 24px;
+}
+
+.card-body {
+  font-size: 16px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.button {
+  background-color: var(--bg-color-light);
+  color: var(--text-color-dark);
+  border: none;
+  border-radius: 3px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+#done {
+  background-color: #4caf50;
+}
+#pending {
+  background-color: #f4ca0f;
+}
+
+.button.delete {
+  background-color: #ff5c5c;
+}
+
+
+.input-container {
+  background-color: #333;
+  color: #fff;
+  border-radius: 5px;
+  padding: 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  background-color: #444;
+  color: #fff;
+  outline: none;
+}
+
+.textarea {
+  resize: none;
+  height: 100px;
+}
+
+.button.save {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button.save:hover {
+  background-color: #0056b3;
+}
+
