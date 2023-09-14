@@ -1,4 +1,5 @@
-const Todo = require('../model/Schema')
+const Todo = require('../model/TodoSchema')
+const User = require('../model/UserSchema')
 
 // createing a todo
 exports.create = (req, res) => {
@@ -12,7 +13,8 @@ exports.create = (req, res) => {
     const todo = new Todo({
         heading: req.body.heading,
         note: req.body.note,
-        currStatus: req.body.currStatus
+        currStatus: req.body.currStatus,
+        user: req.user.id
     })
     todo.save()
     .then(data => {
@@ -27,7 +29,7 @@ exports.create = (req, res) => {
 
 // find all 
 exports.findAll = (req, res) => {
-    Todo.find()
+    Todo.find({user: req.user.id})
         .then(todos => {
             res.send(todos)
         })
@@ -38,8 +40,25 @@ exports.findAll = (req, res) => {
         })
 }
 
-exports.changeStatus = (req, res) => {
+exports.changeStatus = async(req, res) => {
+    const todo = await Todo.findById(req.params.todoId)
 
+    if(!todo){
+        res.status(404).send({
+            message: "Todonot found with id" + req.params.todoId
+        })
+    }
+    
+    const user = await User.findById(req.user.id)
+
+    if(!user){
+        res.status(404).send({message: "User not found"});
+    }
+
+    if(todo.user.toString() !== user.id) {
+        res.status(401)
+        throw new Error("User not authenthorized")
+    }
     const id = req.params.todoId;
     console.log("reached")
     Todo.findByIdAndUpdate(id, {currStatus: "done"})
@@ -61,8 +80,30 @@ exports.changeStatus = (req, res) => {
 }
 
 // delete controller 
-exports.delete = (req, res) => {
+exports.delete = async (req, res) => {
     console.log(req.params);
+
+    const todo = await Todo.findById(req.params.todoId)
+
+    if(!todo){
+        res.status(404).send({
+            message: "Todonot found with id" + req.params.todoId
+        })
+    }
+    
+    const user = await User.findById(req.user.id)
+
+    if(!user){
+        res.status(404).send({message: "User not found"});
+    }
+
+    if(todo.user.toString() !== user.id) {
+        res.status(401)
+        throw new Error("User not authenthorized")
+    }
+
+
+
     Todo.findByIdAndDelete(req.params.todoId)
         .then(todo => {
             if(!todo){
@@ -70,7 +111,7 @@ exports.delete = (req, res) => {
                     message: "Todonot found with id" + req.params.todoId
                 })
             }
-            res.send({message: "Todo deleted successfully....!"})
+            res.send({message: "Todo deleted successfully....!"});
         })
         .catch(err => {
             return res.status(404).send({

@@ -16,14 +16,6 @@ const Item = ({heading, text, remove, currStatus, changeStatus}) => {
         <button className="button delete" onClick={remove}>Delete</button>
       </div>
     </div>
-        {/* <div className="note">
-            <div id='text'>
-                {text}
-            </div>
-            <span id='extra'>
-                <button onClick={remove}>delete</button>
-            </span>
-        </div> */}
         </>
     )
 }

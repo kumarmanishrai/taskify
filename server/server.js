@@ -25,7 +25,8 @@ app.use(cors({
 	methods: ["GET", "POST", "PUT", "DELETE"]
 }))
 
-require('./routes/Route')(app)
+require('./routes/TodoRoute')(app)
+require('./routes/UserRoute')(app)
 
 
 
