@@ -8,3 +8,4 @@ module.exports = (app) => {
     app.get('/deleteTodo/:todoId',protect, controller.delete)
     app.post('/changeStatus/:todoId', protect, controller.changeStatus)
 }
+

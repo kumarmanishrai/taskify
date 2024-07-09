@@ -1,13 +1,33 @@
-import React, { useState } from 'react';
-import '../styles/Login.css';
+import React, { useState } from "react";
+import "../styles/Login.css";
+import { useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate()
+  const url = "http://localhost:5000/api";
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle user login logic here, e.g., send a POST request to your backend.
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${url}/users/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      console.log(data);
+      localStorage.setItem('token', data.token);
+      navigate('/')
+    } else {
+      console.error(data.message);
+    }
   };
 
   return (
@@ -28,6 +48,7 @@ const Login = () => {
         />
         <button type="submit">Login</button>
       </form>
+      <h5>New User? <Link to='/signup' >Register here</Link> </h5>
     </div>
   );
 };

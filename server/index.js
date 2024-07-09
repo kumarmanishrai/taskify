@@ -1,7 +1,4 @@
 const express = require('express')
-
-
-
 require('dotenv').config()
 
 const cors = require('cors')
@@ -21,7 +18,7 @@ db.once('open', function(){
 	console.log("mongodb connected successfully");
 })
 app.use(cors({
-	origin: "https://mern-todo-six-phi.vercel.app",
+	origin: "*",
 	methods: ["GET", "POST", "PUT", "DELETE"]
 }))
 

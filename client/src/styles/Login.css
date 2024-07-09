@@ -1,47 +1,52 @@
 /* Login.css */
 .login-container {
-    background-color: var(--bg-color-dark);
-    color: var(--text-color-dark);
-    font-family: Arial, sans-serif;
-    margin: 40px 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Adjust the height as needed */
-  }
-  
-  .login-container h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .login-container form {
-    max-width: 300px;
-  }
-  
-  .login-container input[type="email"],
-  .login-container input[type="password"] {
-    width: 100%;
-    padding: 8px;
-    border: none;
-    border-radius: 3px;
-    margin-bottom: 10px;
-    background-color: #444;
-    color: #fff;
-    outline: none;
-  }
-  
-  .login-container button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    padding: 8px 15px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .login-container button:hover {
-    background-color: #0056b3;
-  }
-  
+  box-sizing: border-box;
+  background-color: var(--bg-color-dark);
+  color: var(--text-color-dark);
+  font-family: Arial, sans-serif;
+  margin: 40px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.login-container form {
+  max-width: 300px;
+  padding: 60px;
+  border: 2px solid rgb(248, 93, 37);
+  border-radius: 6px;
+}
+
+.login-container input[type="email"],
+.login-container input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  background-color: #444;
+  color: #fff;
+  outline: none;
+}
+
+.login-container button {
+  background-color: rgb(248, 93, 37);
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 12px 19px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+.login-container button:hover {
+  background-color: #0056b3;
+}

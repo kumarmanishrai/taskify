@@ -25,7 +25,7 @@ exports.create = (req, res) => {
             message: err.message || "some error occured while creating todo list"
         })
     })
-}
+} 
 
 // find all 
 exports.findAll = (req, res) => {
@@ -78,6 +78,7 @@ exports.changeStatus = async(req, res) => {
     
 
 }
+
 
 // delete controller 
 exports.delete = async (req, res) => {

@@ -68,6 +68,23 @@ body {
   cursor: pointer;
 }
 
+.logoutBtn {
+  right: 20px;
+  top: 20px;
+  position: absolute;
+}
+
+.logoutBtn button {
+  background-color: rgb(248, 93, 37);
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 12px 19px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
 #done {
   background-color: #4caf50;
 }

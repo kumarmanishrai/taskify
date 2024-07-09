@@ -7,6 +7,7 @@ const User = require('../model/UserSchema')
 
 exports.registerUser = asyncHandler(async (req, res) => {
     const {name, email, password} = req.body 
+    console.log('I am here');
     if(!name || !email || !password){
         res.status(400)
         throw new Error("Please add all the required fields")
@@ -47,26 +48,37 @@ exports.registerUser = asyncHandler(async (req, res) => {
 
 
 exports.loginUser = asyncHandler(async (req, res) => {
-
-    const {email, password} = req.body
-
-    //check for email
-    const user = await User.findOne({email})
-
-    //check for password
-    if(user &&  (await bcrypt.compare(password, user.password))){
-        res.json({
-            _id: user.id,
-            name: user.name,
-            email: user.email,
-            token: generateToken(user._id)
-        })
-    }
-    else{
-        res.status(400)
-        throw new Error("Invalid credentials")
+    try {
+        
+        const {email, password} = req.body
+        
+        //check for email
+        const user = await User.findOne({email})
+        
+        //check for password
+        if(user &&  (await bcrypt.compare(password, user.password))){
+            res.status(200).json({
+                _id: user.id,
+                name: user.name,
+                email: user.email,
+                token: generateToken(user._id)
+            })
+        }
+        else{
+            res.status(400)
+            throw new Error("Invalid credentials")
+        }
+    } catch (error) {
+        res.send(error)
     }
 })
+
+
+exports.authenticate = asyncHandler(async (req, res) => {
+    res.status(200).json({
+        isAuthenticated: true,
+    })
+});
 
 // Private Route
 exports.getMe = asyncHandler(async (req, res) => {
@@ -78,6 +90,7 @@ exports.getMe = asyncHandler(async (req, res) => {
         email,
     })
 })
+
 
 
 const generateToken = (id) => {

@@ -25,7 +25,7 @@
   }
   
   .signup-container input[type="email"],
-  .signup-container input[type="password"] {
+  .signup-container input[type="text"] {
     width: 100%;
     padding: 10px 18px;
     border: none;
