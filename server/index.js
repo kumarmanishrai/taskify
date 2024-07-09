@@ -18,9 +18,21 @@ db.once('open', function(){
 	console.log("mongodb connected successfully");
 })
 app.use(cors({
-	origin: ["https://mern-todo-lemon-nu.vercel.app/"],
-	methods: ["GET", "POST", "PUT", "DELETE"]
-}))
+    origin: ["https://mern-todo-lemon-nu.vercel.app/"],
+    method: ['GET','HEAD', 'POST', 'UPDATE', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],   
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+}));
+
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "https://mern-todo-lemon-nu.vercel.app/");
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  });
 
 require('./routes/TodoRoute')(app)
 require('./routes/UserRoute')(app)
