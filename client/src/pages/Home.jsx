@@ -24,7 +24,7 @@ const Home = () => {
 
   const addTodo = () => {
     axios
-      .post("http://localhost:5000/createTodo", {
+      .post("https://mern-todo-u4aa.vercel.app/createTodo", {
         heading: inpText,
         note: areaText,
         currStatus: "pending",
@@ -44,7 +44,7 @@ const Home = () => {
       return;
     }
     axios
-      .post(`http://localhost:5000/changeStatus/${_id}`)
+      .post(`https://mern-todo-u4aa.vercel.app/changeStatus/${_id}`)
       .then((res) => {
         reloadData();
         console.log(res.data);
@@ -53,7 +53,7 @@ const Home = () => {
   };
   const deleteTodo = (_id) => {
     axios
-      .get(`http://localhost:5000/deleteTodo/${_id}`)
+      .get(`https://mern-todo-u4aa.vercel.app/deleteTodo/${_id}`)
       .then((res) => {
         reloadData();
         console.log(res.data);
