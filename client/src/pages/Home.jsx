@@ -6,8 +6,9 @@ import axios from "axios";
 
 const Home = () => {
   
-  // const url = "https://mern-todo-0k5p.onrender.com";
-  const url = "http://localhost:5000";
+  const url = "https://mern-todo-0k5p.onrender.com";
+  // const url = "http://localhost:5000";
+  
 
   const [todo, setTodo] = useState([]);
   const [inpText, setInpText] = useState('')

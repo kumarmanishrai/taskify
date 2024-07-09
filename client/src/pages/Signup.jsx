@@ -10,14 +10,16 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const url = 'http://localhost:5000/api'
+  // const url = 'http://localhost:5000/api'
+  const url = "https://mern-todo-0k5p.onrender.com"
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle user login logic here, e.g., send a POST request to your backend.
 
     try {
-      const response = await fetch(`${url}/users`, {
+      const response = await fetch(`${url}/api/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

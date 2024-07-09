@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 const Authorize = ({ children }) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
-  const url = "http://localhost:5000/api";
+//   const url = "http://localhost:5000/api";
+    const url = "https://mern-todo-0k5p.onrender.com"
   useEffect(() => {
     const checkingAuth = async () => {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${url}/users/authenticate`, {
+      const response = await fetch(`${url}/api/users/authenticate`, {
         method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -27,7 +28,7 @@ const Authorize = ({ children }) => {
     if (navigate) checkingAuth();
   }, [navigate]);
 
-  return <>{isLoading ? <div>Loading</div> : <>{children}</>}</>;
+  return <>{isLoading ? <div>Loading...</div> : <>{children}</>}</>;
 };
 
 export default Authorize;

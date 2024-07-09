@@ -18,7 +18,7 @@ db.once('open', function(){
 	console.log("mongodb connected successfully");
 })
 app.use(cors({
-	origin: "*",
+	origin: ["https://mern-todo-lemon-nu.vercel.app/"],
 	methods: ["GET", "POST", "PUT", "DELETE"]
 }))
 

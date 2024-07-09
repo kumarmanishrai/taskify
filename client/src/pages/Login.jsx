@@ -6,12 +6,13 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate()
-  const url = "http://localhost:5000/api";
+  // const url = "http://localhost:5000/api";
+  const url = "https://mern-todo-0k5p.onrender.com";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
-    const response = await fetch(`${url}/users/login`, {
+    const response = await fetch(`${url}/api/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
