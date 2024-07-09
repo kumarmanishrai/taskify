@@ -12,7 +12,7 @@ const Home = () => {
 
   const reloadData = () => {
     axios
-      .get("http://localhost:5000/getTodo")
+      .get("https://mern-todo-u4aa.vercel.app/getTodo")
       .then((res) => setTodo(res.data))
       .catch((err) => console.log(err));
 
